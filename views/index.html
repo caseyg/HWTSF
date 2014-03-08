@@ -1,23 +1,81 @@
-<!DOCTYPE html>
-<div class="row">
-	<div class="span12">
-		<form action="">
-			<input type="radio" name="whereBroad" value="Asia" id="asia"><label for="asia">Asia</label>
-			<input type="radio" name="whereBroad" value="Africa" id="africa"><label for="africa">Africa</label>
-			<input type="radio" name="whereBroad" value="Europe" id="europe"><label for="europe">Europe</label>
-			<input type="radio" name="whereBroad" value="North and Central America" id="northandcentralamerica"><label for="northandcentralamerica">North and Central America</label>
-			<input type="radio" name="whereBroad" value="South America" id="southamerica"><label for="southamerica">South America</label>
-			<input type="radio" name="whereBroad" value="Middle East" id="middleeast"><label for="middleeast">Middle East</label>
-		</form>
-		<img src= {{image}} width="" height="100" />
-	</div>
-</div>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script type="text/javascript" charset="utf-8">
+<h1>Hey, where's this shit from?!</h1>
+<p id="tryharder" style="display:none;">
+	try again
+</p>
+<form action="">
+	<input type="radio" name="whereBroad" value="Asia" id="asia"><label for="asia">Asia</label>
+	<input type="radio" name="whereBroad" value="Africa" id="africa"><label for="africa">Africa</label>
+	<input type="radio" name="whereBroad" value="Europe" id="europe"><label for="europe">Europe</label>
+	<input type="radio" name="whereBroad" value="North and Central America" id="northandcentralamerica"><label for="northandcentralamerica">North and Central America</label>
+	<input type="radio" name="whereBroad" value="South America" id="southamerica"><label for="southamerica">South America</label>
+	<input type="radio" name="whereBroad" value="Middle East" id="middleeast"><label for="middleeast">Middle East</label>
+</form>
+<img id="shit" src="{{image}}" />
+
+<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/ion.sound.js"></script>
+
+<p class="thanks">
+	Made by <a href="http://twitter.com/caseyg">Casey Gollan</a> and <a href="https://twitter.com/tegabrain">Tega Brain</a> at <a href="http://www.meetup.com/NYC-Museum-MediaLab-Meetup/events/163140042/">Met MediaLab's Hack Day</a>.<br> Powered by <a href="https://twitter.com/jedahan">Jon Dahan</a>'s <a href="http://scrapi.org/">scrAPI</a> and based on <a href="http://benkauffman.com/">Ben Kaufmann</a>'s <a href="https://github.com/bdkauff/MetRandomImage">MetRandomImage</a>.
+</p>
+
+<script>
+		var viewportHeight = $(window).height();
+		$("#shit").attr("height", viewportHeight-250);
+
+    $(document).ready(function(){
+
+        $.ionSound({
+            sounds: [
+                "light_bulb_breaking",
+                "bell_ring"
+            ],
+            path: "/sounds/",
+            multiPlay: true,
+            volume: "1.0"
+        });
+
+    });
+
 $("input[name='whereBroad']").click(function(){
     if($('input:radio[name=whereBroad]:checked').val() == "{{whereBroad}}"){
-        alert("correct!");
-        //$('#select-table > .roomNumber').attr('enabled',false);
-    }
+			var radioName = $(this).attr("id"); //Get radio name
+			$("label[for='"+radioName+"']").attr("style", "background:lime;");
+			$.ionSound.play("bell_ring");
+			setTimeout(function () {
+				location.reload(false);
+			}, 1000); //will call the function after 2 secs.
+    } else {
+			$.ionSound.play("light_bulb_breaking");
+			var radioName = $(this).attr("id"); //Get radio name
+			$("label[for='"+radioName+"']").attr("style", "background:red;");
+			$("#tryharder").show(function(){
+      	$(this).fadeOut(3000);
+			});
+		}
 });
 </script>
+<link href='http://fonts.googleapis.com/css?family=Unkempt' rel='stylesheet' type='text/css'>
+<style type="text/css" media="screen">
+	body {
+		font-family:Unkempt;
+		text-align:center;
+		padding:25px;
+	}
+	img {
+		max-width:100%;
+	}
+	label {
+		background:#eee;
+		padding:5px 10px;
+		border-radius:5px;
+		margin:5px;
+		display:inline-block;
+}
+	input {
+		display:none;
+	}
+	input, label {
+		cursor:hand;
+	}
+</style>

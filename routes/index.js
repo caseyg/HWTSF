@@ -12,7 +12,7 @@ exports.scrapiRandom = function(req,res) {
 
 		apiData = JSON.parse(data);
 		console.log(apiData);
-			
+
 			templateData = {
 				medium : apiData.Medium,
 				what : apiData.What,
@@ -23,7 +23,7 @@ exports.scrapiRandom = function(req,res) {
 
 			console.log(templateData);
 			res.render("index.html", templateData);
-		
+
 	});
 };
 
