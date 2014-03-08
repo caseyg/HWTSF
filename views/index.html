@@ -1,43 +1,23 @@
 <!DOCTYPE html>
 <div class="row">
 	<div class="span12">
-		<p> {{ medium }} </p>
+		<form action="">
+			<input type="radio" name="whereBroad" value="Asia" id="asia"><label for="asia">Asia</label>
+			<input type="radio" name="whereBroad" value="Africa" id="africa"><label for="africa">Africa</label>
+			<input type="radio" name="whereBroad" value="Europe" id="europe"><label for="europe">Europe</label>
+			<input type="radio" name="whereBroad" value="North and Central America" id="northandcentralamerica"><label for="northandcentralamerica">North and Central America</label>
+			<input type="radio" name="whereBroad" value="South America" id="southamerica"><label for="southamerica">South America</label>
+			<input type="radio" name="whereBroad" value="Middle East" id="middleeast"><label for="middleeast">Middle East</label>
+		</form>
 		<img src= {{image}} width="" height="100" />
 	</div>
-</div>		
-
-
-	
-
-<script>
-$(document).click(function(){
-	location.reload(false);
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+$("input[name='whereBroad']").click(function(){
+    if($('input:radio[name=whereBroad]:checked').val() == "{{whereBroad}}"){
+        alert("correct!");
+        //$('#select-table > .roomNumber').attr('enabled',false);
+    }
 });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
